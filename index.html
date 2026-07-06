@@ -510,33 +510,37 @@ footer{border-top:1px solid var(--line);padding:64px 0 48px;margin-top:clamp(80p
 <script>
 // ---- simple hash routing between Home and Brands ----
 const pages = {home: document.getElementById('page-home'), brands: document.getElementById('page-brands')};
-function show(route, target){
+function switchPage(route){
   Object.values(pages).forEach(p => p.classList.remove('active'));
   (pages[route] || pages.home).classList.add('active');
-  window.scrollTo({top: 0, behavior: 'instant'});
+  revealScan();
+}
+function goTo(route, target){
+  switchPage(route);
+  const hash = route === 'brands' ? '#/brands' : '#/';
+  if (location.hash !== hash) history.replaceState(null, '', hash); // avoids re-firing hashchange
   if (target){
     requestAnimationFrame(() => {
       const el = document.querySelector(target);
       if (el) el.scrollIntoView({behavior: 'smooth'});
     });
+  } else {
+    window.scrollTo({top: 0, behavior: 'instant'});
   }
-  revealScan();
-}
-function routeFromHash(){
-  show(location.hash === '#/brands' ? 'brands' : 'home');
 }
 document.querySelectorAll('[data-route]').forEach(a => {
   a.addEventListener('click', e => {
-    const route = a.dataset.route, target = a.dataset.target;
     if (a.getAttribute('href')?.startsWith('#')){
       e.preventDefault();
-      location.hash = route === 'brands' ? '#/brands' : '#/';
-      show(route, target);
+      goTo(a.dataset.route, a.dataset.target);
       document.getElementById('navLinks').classList.remove('open');
     }
   });
 });
-window.addEventListener('hashchange', routeFromHash);
+window.addEventListener('hashchange', () => {
+  switchPage(location.hash === '#/brands' ? 'brands' : 'home');
+  window.scrollTo({top: 0, behavior: 'instant'});
+});
 
 // ---- mobile menu ----
 document.getElementById('menuToggle').addEventListener('click', () => {
@@ -551,7 +555,7 @@ function revealScan(){
   document.querySelectorAll('.page.active .reveal:not(.in)').forEach(el => io ? io.observe(el) : el.classList.add('in'));
 }
 revealScan();
-routeFromHash();
+switchPage(location.hash === '#/brands' ? 'brands' : 'home');
 </script>
 </body>
 </html>
