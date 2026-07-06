@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happenings™ — The Operating System for Events</title>
+<meta name="description" content="Happenings is the white-label operating system for events. One platform for locations, services, and management — for any gathering.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500&family=Figtree:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#FAFAF8;
+  --surface:#FFFFFF;
+  --ink:#1F1E22;
+  --muted:#77757C;
+  --faint:#A5A3AA;
+  --line:#ECEAE5;
+  --mint:#B9DFDD;
+  --lavender:#C9C1E2;
+  --peach:#FAA681;
+  --blush:#EFA3A8;
+  --butter:#FCE89B;
+  --sage:#AED5AA;
+  --radius:18px;
+  --serif:'Fraunces',Georgia,serif;
+  --sans:'Figtree',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  background:var(--bg);
+  color:var(--ink);
+  font-family:var(--sans);
+  font-weight:400;
+  font-size:16px;
+  line-height:1.65;
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+}
+::selection{background:var(--butter);color:var(--ink)}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;display:block}
+.wrap{max-width:1200px;margin:0 auto;padding:0 clamp(24px,5vw,64px)}
+
+/* ---------- focus ---------- */
+a:focus-visible,button:focus-visible{outline:2px solid var(--ink);outline-offset:3px;border-radius:4px}
+
+/* ---------- nav ---------- */
+header{
+  position:sticky;top:0;z-index:50;
+  background:rgba(250,250,248,.86);
+  -webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--line);
+}
+.nav{display:flex;align-items:center;justify-content:space-between;height:76px}
+.wordmark{font-family:var(--serif);font-weight:500;font-size:21px;letter-spacing:.01em;display:flex;align-items:center;gap:10px}
+.wordmark .tm{font-family:var(--sans);font-size:9px;font-weight:600;color:var(--faint);align-self:flex-start;margin-top:3px;letter-spacing:.08em}
+.confetti{display:inline-flex;gap:3px}
+.confetti i{width:6px;height:6px;border-radius:50%;display:block}
+.nav-links{display:flex;gap:34px;align-items:center;font-size:14.5px;font-weight:500;color:var(--muted)}
+.nav-links a{position:relative;padding:4px 0;transition:color .2s}
+.nav-links a:hover{color:var(--ink)}
+.nav-links a::after{content:'';position:absolute;left:0;bottom:-2px;width:0;height:2px;border-radius:2px;background:var(--mint);transition:width .25s ease}
+.nav-links a:hover::after{width:100%}
+.btn{
+  display:inline-flex;align-items:center;gap:9px;
+  background:var(--ink);color:#fff;border:none;cursor:pointer;
+  font-family:var(--sans);font-size:14.5px;font-weight:500;
+  padding:13px 26px;border-radius:100px;
+  transition:transform .2s ease,box-shadow .2s ease;
+}
+.btn:hover{transform:translateY(-1px);box-shadow:0 10px 28px rgba(31,30,34,.16)}
+.btn .dot{width:7px;height:7px;border-radius:50%;background:var(--butter)}
+.btn.ghost{background:transparent;color:var(--ink);border:1px solid var(--ink)}
+.btn.ghost:hover{box-shadow:0 8px 22px rgba(31,30,34,.08)}
+.menu-toggle{display:none;background:none;border:none;cursor:pointer;font-size:26px;line-height:1;color:var(--ink)}
+
+/* ---------- shared ---------- */
+section{padding:clamp(88px,11vw,150px) 0}
+.eyebrow{
+  display:inline-flex;align-items:center;gap:9px;
+  font-size:12px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);
+  margin-bottom:26px;
+}
+.eyebrow i{width:8px;height:8px;border-radius:50%;display:inline-block}
+h1,h2,h3{font-family:var(--serif);font-weight:400;letter-spacing:-.01em}
+h2{font-size:clamp(34px,4.4vw,54px);line-height:1.12;max-width:15em}
+.lede{font-size:clamp(17px,1.6vw,19.5px);color:var(--muted);max-width:36em;margin-top:24px;font-weight:400}
+.hairline{border:none;border-top:1px solid var(--line)}
+
+/* ---------- hero ---------- */
+.hero{padding:clamp(96px,13vw,180px) 0 clamp(80px,9vw,130px)}
+.hero h1{
+  font-size:clamp(46px,7.2vw,96px);
+  line-height:1.04;font-weight:300;letter-spacing:-.02em;
+  max-width:11em;
+}
+.hero h1 em{font-style:italic;font-weight:400;position:relative;white-space:nowrap}
+.hero h1 em::after{
+  content:'';position:absolute;left:2%;right:2%;bottom:.06em;height:.14em;z-index:-1;border-radius:4px;
+  background:linear-gradient(90deg,var(--mint),var(--lavender),var(--blush),var(--butter));
+  opacity:.55;
+}
+.hero .lede{margin-top:32px}
+.hero-cta{display:flex;gap:16px;margin-top:44px;flex-wrap:wrap}
+.hero-meta{
+  display:flex;gap:clamp(28px,5vw,72px);margin-top:clamp(64px,8vw,110px);
+  padding-top:36px;border-top:1px solid var(--line);flex-wrap:wrap;
+}
+.hero-meta div{min-width:150px}
+.hero-meta b{font-family:var(--serif);font-weight:400;font-size:30px;display:block;letter-spacing:-.01em}
+.hero-meta span{font-size:13px;color:var(--muted);letter-spacing:.04em}
+
+/* ---------- builder (signature) ---------- */
+.builder{background:var(--surface);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.steps{display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;margin-top:64px}
+.step{background:var(--surface);padding:34px 28px 38px;position:relative;transition:background .25s ease}
+.step:hover{background:var(--bg)}
+.step .num{
+  width:34px;height:34px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-size:13px;font-weight:600;margin-bottom:20px;color:var(--ink);
+}
+.step h3{font-size:19px;margin-bottom:10px;font-weight:500}
+.step p{font-size:14px;color:var(--muted);line-height:1.6}
+.step::after{
+  content:'';position:absolute;top:0;left:0;right:0;height:3px;opacity:0;transition:opacity .25s;
+}
+.step:nth-child(1) .num{background:var(--mint)} .step:nth-child(1)::after{background:var(--mint)}
+.step:nth-child(2) .num{background:var(--butter)} .step:nth-child(2)::after{background:var(--butter)}
+.step:nth-child(3) .num{background:var(--lavender)} .step:nth-child(3)::after{background:var(--lavender)}
+.step:nth-child(4) .num{background:var(--blush)} .step:nth-child(4)::after{background:var(--blush)}
+.step:nth-child(5) .num{background:var(--sage)} .step:nth-child(5)::after{background:var(--sage)}
+.step:hover::after{opacity:1}
+.equation{
+  margin-top:44px;text-align:center;font-family:var(--serif);
+  font-size:clamp(19px,2.4vw,26px);color:var(--muted);font-weight:300;
+}
+.equation b{color:var(--ink);font-weight:400}
+.equation .plus{margin:0 .5em;color:var(--faint)}
+
+/* ---------- cards (locations / services) ---------- */
+.grid{display:grid;gap:22px;margin-top:64px}
+.grid.loc{grid-template-columns:repeat(3,1fr)}
+.grid.svc{grid-template-columns:repeat(4,1fr)}
+.card{
+  background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);
+  padding:32px 28px;position:relative;overflow:hidden;
+  transition:transform .25s ease,box-shadow .25s ease;
+}
+.card:hover{transform:translateY(-4px);box-shadow:0 18px 44px rgba(31,30,34,.07)}
+.card .chip{
+  display:inline-block;font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;
+  padding:5px 12px;border-radius:100px;margin-bottom:22px;color:var(--ink);
+}
+.card h3{font-size:21px;font-weight:500;margin-bottom:8px}
+.card p{font-size:14.5px;color:var(--muted)}
+.note{font-size:13px;color:var(--faint);margin-top:26px;font-style:italic}
+
+/* service tiles */
+.svc .card{padding:28px 24px}
+.svc .card h3{font-size:17.5px}
+.svc .card .mark{width:10px;height:10px;border-radius:50%;margin-bottom:20px}
+
+/* ---------- management ---------- */
+.mgmt{background:var(--surface);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.roles{margin-top:56px;border-top:1px solid var(--line)}
+.role{
+  display:grid;grid-template-columns:64px 260px 1fr;gap:28px;align-items:baseline;
+  padding:32px 8px;border-bottom:1px solid var(--line);transition:background .2s;
+}
+.role:hover{background:var(--bg)}
+.role .idx{font-family:var(--serif);font-size:15px;color:var(--faint)}
+.role h3{font-size:21px;font-weight:500;display:flex;align-items:center;gap:12px}
+.role h3 i{width:8px;height:8px;border-radius:50%;flex:none}
+.role p{font-size:15px;color:var(--muted);max-width:46em}
+
+/* ---------- brands teaser + page ---------- */
+.brand-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:26px;margin-top:64px}
+.brand-card{
+  background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);
+  padding:44px 40px;display:flex;flex-direction:column;min-height:320px;
+  transition:transform .25s ease,box-shadow .25s ease;position:relative;overflow:hidden;
+}
+.brand-card:hover{transform:translateY(-4px);box-shadow:0 20px 50px rgba(31,30,34,.08)}
+.brand-card::before{content:'';position:absolute;top:0;left:0;right:0;height:4px}
+.brand-card.live::before{background:var(--sage)}
+.brand-card.c1::before{background:var(--lavender)}
+.brand-card.c2::before{background:var(--blush)}
+.brand-card.c3::before{background:var(--butter)}
+.status{
+  align-self:flex-start;font-size:11px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;
+  padding:6px 14px;border-radius:100px;margin-bottom:28px;
+}
+.status.live{background:var(--sage);color:var(--ink)}
+.status.soon{background:var(--bg);border:1px solid var(--line);color:var(--muted)}
+.brand-card h3{font-family:var(--serif);font-size:32px;font-weight:400;margin-bottom:6px}
+.brand-card .vertical{font-size:12.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);font-weight:600;margin-bottom:20px}
+.brand-card p{font-size:15px;color:var(--muted);flex:1}
+.brand-card .tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:26px}
+.brand-card .tags span{font-size:12.5px;color:var(--muted);border:1px solid var(--line);border-radius:100px;padding:5px 13px;background:var(--bg)}
+.brand-card .visit{margin-top:28px;font-size:14.5px;font-weight:600;display:inline-flex;align-items:center;gap:8px}
+.brand-card .visit:hover{gap:12px}
+.brand-card .visit{transition:gap .2s}
+
+/* ---------- investor strip ---------- */
+.strip{
+  background:var(--ink);color:#FAFAF8;border-radius:calc(var(--radius) + 6px);
+  padding:clamp(48px,6vw,80px);display:flex;justify-content:space-between;align-items:center;gap:40px;flex-wrap:wrap;
+}
+.strip h2{color:#fff;font-weight:300;font-size:clamp(28px,3.4vw,42px)}
+.strip p{color:rgba(250,250,248,.62);margin-top:14px;max-width:34em;font-size:15.5px}
+.strip .btn{background:#FAFAF8;color:var(--ink)}
+.strip .btn .dot{background:var(--peach)}
+
+/* ---------- footer ---------- */
+footer{border-top:1px solid var(--line);padding:64px 0 48px;margin-top:clamp(80px,10vw,140px)}
+.foot{display:flex;justify-content:space-between;gap:40px;flex-wrap:wrap}
+.foot small{color:var(--faint);font-size:13px}
+.foot .cols{display:flex;gap:clamp(40px,6vw,90px);flex-wrap:wrap}
+.foot h4{font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--faint);margin-bottom:16px;font-weight:600}
+.foot a{display:block;font-size:14.5px;color:var(--muted);margin-bottom:10px;transition:color .2s}
+.foot a:hover{color:var(--ink)}
+
+/* ---------- page routing ---------- */
+.page{display:none}
+.page.active{display:block}
+.page-head{padding:clamp(90px,11vw,150px) 0 0}
+
+/* ---------- reveal ---------- */
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .7s ease}
+.reveal.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important}
+  .reveal{opacity:1;transform:none}
+  html{scroll-behavior:auto}
+}
+
+/* ---------- responsive ---------- */
+@media (max-width:1020px){
+  .steps{grid-template-columns:repeat(2,1fr)}
+  .step:last-child{grid-column:1/-1}
+  .grid.svc{grid-template-columns:repeat(2,1fr)}
+  .role{grid-template-columns:44px 1fr;grid-template-rows:auto auto}
+  .role p{grid-column:2}
+}
+@media (max-width:760px){
+  .nav-links{display:none;position:absolute;top:76px;left:0;right:0;background:var(--bg);
+    border-bottom:1px solid var(--line);flex-direction:column;padding:24px;gap:20px;align-items:flex-start}
+  .nav-links.open{display:flex}
+  .menu-toggle{display:block}
+  .grid.loc{grid-template-columns:1fr}
+  .grid.svc{grid-template-columns:1fr}
+  .brand-grid{grid-template-columns:1fr}
+  .steps{grid-template-columns:1fr}
+  .nav .btn{display:none}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a href="#/" class="wordmark" data-route="home">
+      <span class="confetti" aria-hidden="true">
+        <i style="background:var(--mint)"></i><i style="background:var(--lavender)"></i><i style="background:var(--peach)"></i>
+      </span>
+      Happenings<span class="tm">TM</span>
+    </a>
+    <nav class="nav-links" id="navLinks">
+      <a href="#/" data-route="home" data-target="#platform">Platform</a>
+      <a href="#/" data-route="home" data-target="#locations">Locations</a>
+      <a href="#/" data-route="home" data-target="#services">Services</a>
+      <a href="#/" data-route="home" data-target="#management">Management</a>
+      <a href="#/brands" data-route="brands">Brands</a>
+    </nav>
+    <a class="btn" href="#/" data-route="home" data-target="#platform"><span class="dot"></span>Start planning</a>
+    <button class="menu-toggle" id="menuToggle" aria-label="Open menu">☰</button>
+  </div>
+</header>
+
+<!-- ================= HOME ================= -->
+<main class="page active" id="page-home">
+
+  <section class="hero wrap">
+    <div class="reveal">
+      <div class="eyebrow"><i style="background:var(--mint)"></i>The operating system for events</div>
+      <h1>Any gathering, <em>beautifully produced</em>. One platform.</h1>
+      <p class="lede">Happenings unifies locations, services, and dedicated management into a single, seamless production pipeline — for weddings, corporate gatherings, celebrations, and everything in between.</p>
+      <div class="hero-cta">
+        <a class="btn" href="#platform"><span class="dot"></span>Build your event</a>
+        <a class="btn ghost" href="#/brands" data-route="brands">Explore our brands</a>
+      </div>
+    </div>
+    <div class="hero-meta reveal">
+      <div><b>$1.46T</b><span>Legacy event market</span></div>
+      <div><b>98%</b><span>Reduction in planning hours</span></div>
+      <div><b>2×</b><span>Vendor redundancy, every event</span></div>
+      <div><b>1</b><span>Point of contact, start to finish</span></div>
+    </div>
+  </section>
+
+  <!-- BUILDER -->
+  <section class="builder" id="platform">
+    <div class="wrap">
+      <div class="reveal">
+        <div class="eyebrow"><i style="background:var(--butter)"></i>How it works</div>
+        <h2>Compose your event, step by step.</h2>
+        <p class="lede">Every Happening is built the same simple way. Choose the pieces — we orchestrate the whole.</p>
+      </div>
+      <div class="steps reveal">
+        <div class="step">
+          <div class="num">1</div>
+          <h3>Choose your location</h3>
+          <p>Browse curated venues — gardens, rooftops, ranches, galleries — each pre-vetted and production-ready.</p>
+        </div>
+        <div class="step">
+          <div class="num">2</div>
+          <h3>Add your services</h3>
+          <p>Layer in catering, floral, photography, music, and more. Every service integrates automatically.</p>
+        </div>
+        <div class="step">
+          <div class="num">3</div>
+          <h3>Meet your management</h3>
+          <p>A dedicated team — planner through on-site staff — is assigned to your event from day one.</p>
+        </div>
+        <div class="step">
+          <div class="num">4</div>
+          <h3>Share &amp; confirm</h3>
+          <p>Send your Share link. Production activates the moment guest commitments are validated.</p>
+        </div>
+        <div class="step">
+          <div class="num">5</div>
+          <h3>We produce it</h3>
+          <p>Vendors dispatch, timelines sync, backups stand by. You show up. Everything else converges.</p>
+        </div>
+      </div>
+      <p class="equation reveal"><b>Location</b><span class="plus">+</span><b>Services</b><span class="plus">+</span><b>Management</b><span class="plus">=</span><em>Your Happening</em></p>
+    </div>
+  </section>
+
+  <!-- LOCATIONS -->
+  <section class="wrap" id="locations">
+    <div class="reveal">
+      <div class="eyebrow"><i style="background:var(--lavender)"></i>Locations</div>
+      <h2>Spaces for every kind of occasion.</h2>
+      <p class="lede">From open-air ceremonies to executive summits — every venue on the platform is inspected, permitted, and paired with a standby alternative.</p>
+    </div>
+    <div class="grid loc reveal">
+      <div class="card"><span class="chip" style="background:var(--mint)">Outdoor</span><h3>Botanical Gardens</h3><p>Manicured grounds and natural backdrops for ceremonies, receptions, and golden-hour celebrations.</p></div>
+      <div class="card"><span class="chip" style="background:var(--butter)">Urban</span><h3>Rooftop Terraces</h3><p>Skyline settings for launches, cocktail evenings, and after-hours gatherings.</p></div>
+      <div class="card"><span class="chip" style="background:var(--blush)">Destination</span><h3>Private Ranches</h3><p>Full-property weekends — retreats, reunions, and multi-day celebrations, produced end to end.</p></div>
+      <div class="card"><span class="chip" style="background:var(--lavender)">Cultural</span><h3>Gallery Lofts</h3><p>Minimal, light-filled interiors for dinners, showcases, and brand moments.</p></div>
+      <div class="card"><span class="chip" style="background:var(--peach)">Waterfront</span><h3>Beachfront Venues</h3><p>Coastal settings with full logistics — power, permits, tenting, and tide-aware timelines.</p></div>
+      <div class="card"><span class="chip" style="background:var(--sage)">Classic</span><h3>Historic Ballrooms</h3><p>Grand rooms for galas, anniversaries, and formal corporate evenings.</p></div>
+    </div>
+    <p class="note">Example venue categories. The Happenings platform curates locations per market and per brand.</p>
+  </section>
+
+  <!-- SERVICES -->
+  <section class="wrap" id="services" style="padding-top:0">
+    <div class="reveal">
+      <div class="eyebrow"><i style="background:var(--peach)"></i>Services</div>
+      <h2>Every service. One integration.</h2>
+      <p class="lede">Each service is an additive unit — select what you need, and it slots into a single synchronized production timeline with a backup provider mirrored behind it.</p>
+    </div>
+    <div class="grid svc reveal">
+      <div class="card"><div class="mark" style="background:var(--mint)"></div><h3>Catering &amp; Cuisine</h3><p>Plated, stations, or family-style — matched to venue and headcount.</p></div>
+      <div class="card"><div class="mark" style="background:var(--blush)"></div><h3>Floral &amp; Design</h3><p>Installations, tablescapes, and styling aligned to your palette.</p></div>
+      <div class="card"><div class="mark" style="background:var(--lavender)"></div><h3>Photography &amp; Film</h3><p>Coverage teams scheduled around your event's key moments.</p></div>
+      <div class="card"><div class="mark" style="background:var(--butter)"></div><h3>Music &amp; Entertainment</h3><p>DJs, live acts, and performers with full technical riders handled.</p></div>
+      <div class="card"><div class="mark" style="background:var(--sage)"></div><h3>Rentals &amp; Décor</h3><p>Seating, tenting, lighting, and staging — delivered and struck on time.</p></div>
+      <div class="card"><div class="mark" style="background:var(--peach)"></div><h3>Bar Service</h3><p>Licensed, insured beverage programs from toast to last call.</p></div>
+      <div class="card"><div class="mark" style="background:var(--mint)"></div><h3>Guest Transportation</h3><p>Shuttles, valet, and arrival logistics timed to the minute.</p></div>
+      <div class="card"><div class="mark" style="background:var(--lavender)"></div><h3>AV &amp; Production</h3><p>Sound, screens, and staging for keynotes, toasts, and showcases.</p></div>
+    </div>
+    <p class="note">Example service categories. Offerings are tailored per event vertical and brand.</p>
+  </section>
+
+  <!-- MANAGEMENT -->
+  <section class="mgmt" id="management">
+    <div class="wrap">
+      <div class="reveal">
+        <div class="eyebrow"><i style="background:var(--blush)"></i>Management</div>
+        <h2>A dedicated team on every event.</h2>
+        <p class="lede">Five roles. One accountable chain. From the first conversation to the final send-off, your team is the unified safety net legacy planning never had.</p>
+      </div>
+      <div class="roles reveal">
+        <div class="role"><span class="idx">01</span><h3><i style="background:var(--mint)"></i>Planner</h3><p>Designs the full event architecture — vision, budget, vendors, and timeline — and remains your strategic lead throughout.</p></div>
+        <div class="role"><span class="idx">02</span><h3><i style="background:var(--butter)"></i>Coordinator</h3><p>Manages every vendor relationship and confirmation cycle, keeping all moving pieces aligned to a single schedule.</p></div>
+        <div class="role"><span class="idx">03</span><h3><i style="background:var(--lavender)"></i>Production Manager</h3><p>Owns logistics, load-in, and technical execution — power, staging, permits, and contingency activation.</p></div>
+        <div class="role"><span class="idx">04</span><h3><i style="background:var(--blush)"></i>On-Site Manager</h3><p>Runs the day itself: cueing the timeline, directing vendors, and resolving anything in real time.</p></div>
+        <div class="role"><span class="idx">05</span><h3><i style="background:var(--sage)"></i>On-Site Staff</h3><p>Hands-on support for guests and vendors — setup, service, and strike, handled invisibly.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BRANDS TEASER -->
+  <section class="wrap">
+    <div class="reveal">
+      <div class="eyebrow"><i style="background:var(--sage)"></i>Our brands</div>
+      <h2>One engine. A family of brands.</h2>
+      <p class="lede">Happenings powers purpose-built brands for each event vertical — beginning with ParkWed, our live proof-point for outdoor weddings.</p>
+      <div class="hero-cta" style="margin-top:36px">
+        <a class="btn" href="#/brands" data-route="brands"><span class="dot"></span>Explore the brands</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- INVESTOR STRIP -->
+  <section class="wrap" style="padding-top:0">
+    <div class="strip reveal">
+      <div>
+        <h2>Building the standard for a $1.46T market.</h2>
+        <p>A decade of field-tested operations, now encoded in software. We're partnering with investors who see what gatherings can become.</p>
+      </div>
+      <a class="btn" href="mailto:hello@happenings.com"><span class="dot"></span>Contact us</a>
+    </div>
+  </section>
+
+</main>
+
+<!-- ================= BRANDS ================= -->
+<main class="page" id="page-brands">
+  <section class="page-head wrap">
+    <div class="reveal in">
+      <div class="eyebrow"><i style="background:var(--lavender)"></i>The Happenings family</div>
+      <h2>One platform. Every occasion.</h2>
+      <p class="lede">Each brand is a purpose-built storefront on the same production engine — same locations logic, same services integration, same five-role management team. New verticals launch in weeks, not years.</p>
+    </div>
+  </section>
+  <section class="wrap" style="padding-top:0">
+    <div class="brand-grid">
+      <a class="brand-card live" href="https://parkwed.com" target="_blank" rel="noopener">
+        <span class="status live">● Live now</span>
+        <h3>ParkWed</h3>
+        <div class="vertical">Outdoor Weddings</div>
+        <p>Our first live proof-point. ParkWed produces complete outdoor weddings — venue, services, and a dedicated five-role team — in the most high-stakes consumer vertical there is.</p>
+        <div class="tags"><span>Ceremonies</span><span>Receptions</span><span>Elopements</span></div>
+        <span class="visit">Visit parkwed.com <span aria-hidden="true">→</span></span>
+      </a>
+      <div class="brand-card c1">
+        <span class="status soon">Coming soon</span>
+        <h3>Offsite</h3>
+        <div class="vertical">Corporate Events</div>
+        <p>Sales kickoffs, leadership retreats, incentive trips, product launches, and VIP galas — produced with the precision your brand demands, minus the coordination overhead.</p>
+        <div class="tags"><span>Kickoffs</span><span>Retreats</span><span>Launches</span><span>Galas</span></div>
+      </div>
+      <div class="brand-card c2">
+        <span class="status soon">Coming soon</span>
+        <h3>VillaBach</h3>
+        <div class="vertical">Bachelorette &amp; Bachelor</div>
+        <p>Full-weekend celebration itineraries — the house, the dinners, the experiences, the transport — planned once and produced flawlessly, so nobody in the group chat has to be the planner.</p>
+        <div class="tags"><span>Weekends</span><span>Itineraries</span><span>Group travel</span></div>
+      </div>
+      <div class="brand-card c3">
+        <span class="status soon">Coming soon</span>
+        <h3>Jubilee</h3>
+        <div class="vertical">Milestones &amp; Reunions</div>
+        <p>Anniversaries, graduations, family reunions, and landmark birthdays — the gatherings families put off for years, made as easy to produce as sending the invitation.</p>
+        <div class="tags"><span>Anniversaries</span><span>Reunions</span><span>Graduations</span></div>
+      </div>
+    </div>
+    <p class="note">Brand names for pre-launch verticals are working titles.</p>
+  </section>
+  <section class="wrap" style="padding-top:0">
+    <div class="strip reveal in">
+      <div>
+        <h2>Your vertical could be next.</h2>
+        <p>The Gala engine replicates this blueprint across owned and white-label brands. Talk to us about licensing or partnership.</p>
+      </div>
+      <a class="btn" href="mailto:hello@happenings.com"><span class="dot"></span>Get in touch</a>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap foot">
+    <div>
+      <div class="wordmark" style="margin-bottom:14px">
+        <span class="confetti" aria-hidden="true">
+          <i style="background:var(--mint)"></i><i style="background:var(--lavender)"></i><i style="background:var(--peach)"></i>
+        </span>
+        Happenings<span class="tm">TM</span>
+      </div>
+      <small>The operating system for events.<br>© 2026 Happenings. All rights reserved.</small>
+    </div>
+    <div class="cols">
+      <div>
+        <h4>Platform</h4>
+        <a href="#/" data-route="home" data-target="#locations">Locations</a>
+        <a href="#/" data-route="home" data-target="#services">Services</a>
+        <a href="#/" data-route="home" data-target="#management">Management</a>
+      </div>
+      <div>
+        <h4>Brands</h4>
+        <a href="https://parkwed.com" target="_blank" rel="noopener">ParkWed</a>
+        <a href="#/brands" data-route="brands">All brands</a>
+      </div>
+      <div>
+        <h4>Company</h4>
+        <a href="mailto:hello@happenings.com">Contact</a>
+        <a href="mailto:invest@happenings.com">Investors</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+// ---- simple hash routing between Home and Brands ----
+const pages = {home: document.getElementById('page-home'), brands: document.getElementById('page-brands')};
+function show(route, target){
+  Object.values(pages).forEach(p => p.classList.remove('active'));
+  (pages[route] || pages.home).classList.add('active');
+  window.scrollTo({top: 0, behavior: 'instant'});
+  if (target){
+    requestAnimationFrame(() => {
+      const el = document.querySelector(target);
+      if (el) el.scrollIntoView({behavior: 'smooth'});
+    });
+  }
+  revealScan();
+}
+function routeFromHash(){
+  show(location.hash === '#/brands' ? 'brands' : 'home');
+}
+document.querySelectorAll('[data-route]').forEach(a => {
+  a.addEventListener('click', e => {
+    const route = a.dataset.route, target = a.dataset.target;
+    if (a.getAttribute('href')?.startsWith('#')){
+      e.preventDefault();
+      location.hash = route === 'brands' ? '#/brands' : '#/';
+      show(route, target);
+      document.getElementById('navLinks').classList.remove('open');
+    }
+  });
+});
+window.addEventListener('hashchange', routeFromHash);
+
+// ---- mobile menu ----
+document.getElementById('menuToggle').addEventListener('click', () => {
+  document.getElementById('navLinks').classList.toggle('open');
+});
+
+// ---- scroll reveal ----
+const io = ('IntersectionObserver' in window) ? new IntersectionObserver(entries => {
+  entries.forEach(en => { if (en.isIntersecting){ en.target.classList.add('in'); io.unobserve(en.target); } });
+}, {threshold: .12}) : null;
+function revealScan(){
+  document.querySelectorAll('.page.active .reveal:not(.in)').forEach(el => io ? io.observe(el) : el.classList.add('in'));
+}
+revealScan();
+routeFromHash();
+</script>
+</body>
+</html>
