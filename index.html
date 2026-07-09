@@ -7,14 +7,14 @@
 <meta name="description" content="Happenings is the white-label operating system for events. One platform for locations, services, and management — for any gathering.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500&family=Figtree:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root{
   --bg:#FAFAF8;
   --surface:#FFFFFF;
   --ink:#1F1E22;
   --muted:#77757C;
-  --faint:#A5A3AA;
+  --faint:#ABA9B0;
   --line:#ECEAE5;
   --mint:#B9DFDD;
   --lavender:#C9C1E2;
@@ -22,166 +22,212 @@
   --blush:#EFA3A8;
   --butter:#FCE89B;
   --sage:#AED5AA;
-  --radius:18px;
-  --serif:'Fraunces',Georgia,serif;
-  --sans:'Figtree',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  /* Brand type stack — Helvetica Neue per style guide, Inter as the guide's named fallback */
+  --font:'Helvetica Neue','HelveticaNeue',Inter,Helvetica,Arial,sans-serif;
 }
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{
   background:var(--bg);
   color:var(--ink);
-  font-family:var(--sans);
-  font-weight:400;
+  font-family:var(--font);
+  font-weight:300;
   font-size:16px;
-  line-height:1.65;
+  line-height:1.7;
   -webkit-font-smoothing:antialiased;
   text-rendering:optimizeLegibility;
 }
 ::selection{background:var(--butter);color:var(--ink)}
 a{color:inherit;text-decoration:none}
-img{max-width:100%;display:block}
-.wrap{max-width:1200px;margin:0 auto;padding:0 clamp(24px,5vw,64px)}
-
-/* ---------- focus ---------- */
+.wrap{max-width:1160px;margin:0 auto;padding:0 clamp(20px,5vw,64px)}
 a:focus-visible,button:focus-visible{outline:2px solid var(--ink);outline-offset:3px;border-radius:4px}
 
-/* ---------- nav ---------- */
+/* ============ type system (per style guide web styles) ============ */
+.kicker{
+  display:flex;align-items:center;gap:10px;
+  font-size:11.5px;font-weight:600;letter-spacing:.26em;text-transform:uppercase;color:var(--muted);
+  margin-bottom:clamp(22px,3vw,34px);
+}
+.kicker i{width:8px;height:8px;border-radius:50%;flex:none}
+.display{
+  font-weight:200;
+  font-size:clamp(40px,6vw,76px);
+  line-height:1.06;
+  letter-spacing:-.022em;
+  max-width:13em;
+}
+.lede{
+  font-size:clamp(16.5px,1.5vw,19px);
+  font-weight:300;color:var(--muted);
+  max-width:34em;margin-top:clamp(20px,2.6vw,30px);
+}
+
+/* ============ nav ============ */
 header{
-  position:sticky;top:0;z-index:50;
-  background:rgba(250,250,248,.86);
-  -webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);
+  position:sticky;top:0;z-index:60;
+  background:rgba(250,250,248,.88);
+  -webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);
   border-bottom:1px solid var(--line);
 }
-.nav{display:flex;align-items:center;justify-content:space-between;height:76px}
-.wordmark{font-family:var(--serif);font-weight:500;font-size:21px;letter-spacing:.01em;display:flex;align-items:center;gap:10px}
-.wordmark .tm{font-family:var(--sans);font-size:9px;font-weight:600;color:var(--faint);align-self:flex-start;margin-top:3px;letter-spacing:.08em}
+.nav{display:flex;align-items:center;justify-content:space-between;height:72px}
+.wordmark{font-weight:200;font-size:22px;letter-spacing:.005em;display:flex;align-items:center;gap:10px;z-index:70}
+.wordmark .tm{font-size:8.5px;font-weight:600;color:var(--faint);align-self:flex-start;margin-top:4px;letter-spacing:.08em}
 .confetti{display:inline-flex;gap:3px}
 .confetti i{width:6px;height:6px;border-radius:50%;display:block}
-.nav-links{display:flex;gap:34px;align-items:center;font-size:14.5px;font-weight:500;color:var(--muted)}
+.nav-links{display:flex;gap:36px;align-items:center;font-size:14px;font-weight:400;color:var(--muted)}
 .nav-links a{position:relative;padding:4px 0;transition:color .2s}
 .nav-links a:hover{color:var(--ink)}
-.nav-links a::after{content:'';position:absolute;left:0;bottom:-2px;width:0;height:2px;border-radius:2px;background:var(--mint);transition:width .25s ease}
+.nav-links a::after{content:'';position:absolute;left:0;bottom:-1px;width:0;height:2px;border-radius:2px;background:var(--mint);transition:width .25s ease}
 .nav-links a:hover::after{width:100%}
 .btn{
-  display:inline-flex;align-items:center;gap:9px;
+  display:inline-flex;align-items:center;justify-content:center;gap:9px;
   background:var(--ink);color:#fff;border:none;cursor:pointer;
-  font-family:var(--sans);font-size:14.5px;font-weight:500;
-  padding:13px 26px;border-radius:100px;
+  font-family:var(--font);font-size:14.5px;font-weight:500;letter-spacing:.01em;
+  padding:14px 28px;border-radius:100px;min-height:48px;
   transition:transform .2s ease,box-shadow .2s ease;
 }
 .btn:hover{transform:translateY(-1px);box-shadow:0 10px 28px rgba(31,30,34,.16)}
 .btn .dot{width:7px;height:7px;border-radius:50%;background:var(--butter)}
-.btn.ghost{background:transparent;color:var(--ink);border:1px solid var(--ink)}
-.btn.ghost:hover{box-shadow:0 8px 22px rgba(31,30,34,.08)}
-.menu-toggle{display:none;background:none;border:none;cursor:pointer;font-size:26px;line-height:1;color:var(--ink)}
-
-/* ---------- shared ---------- */
-section{padding:clamp(88px,11vw,150px) 0}
-.eyebrow{
-  display:inline-flex;align-items:center;gap:9px;
-  font-size:12px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);
-  margin-bottom:26px;
+.btn.ghost{background:transparent;color:var(--ink);border:1px solid rgba(31,30,34,.28)}
+.btn.ghost:hover{border-color:var(--ink);box-shadow:0 8px 22px rgba(31,30,34,.08)}
+.menu-toggle{
+  display:none;background:none;border:none;cursor:pointer;z-index:70;
+  width:48px;height:48px;margin-right:-10px;
+  flex-direction:column;align-items:center;justify-content:center;gap:6px;
 }
-.eyebrow i{width:8px;height:8px;border-radius:50%;display:inline-block}
-h1,h2,h3{font-family:var(--serif);font-weight:400;letter-spacing:-.01em}
-h2{font-size:clamp(34px,4.4vw,54px);line-height:1.12;max-width:15em}
-.lede{font-size:clamp(17px,1.6vw,19.5px);color:var(--muted);max-width:36em;margin-top:24px;font-weight:400}
-.hairline{border:none;border-top:1px solid var(--line)}
+.menu-toggle span{display:block;width:22px;height:1.5px;background:var(--ink);transition:transform .25s ease,opacity .2s}
+.menu-toggle.open span:nth-child(1){transform:translateY(3.75px) rotate(45deg)}
+.menu-toggle.open span:nth-child(2){transform:translateY(-3.75px) rotate(-45deg)}
 
-/* ---------- hero ---------- */
-.hero{padding:clamp(96px,13vw,180px) 0 clamp(80px,9vw,130px)}
-.hero h1{
-  font-size:clamp(46px,7.2vw,96px);
-  line-height:1.04;font-weight:300;letter-spacing:-.02em;
-  max-width:11em;
-}
-.hero h1 em{font-style:italic;font-weight:400;position:relative;white-space:nowrap}
-.hero h1 em::after{
-  content:'';position:absolute;left:2%;right:2%;bottom:.06em;height:.14em;z-index:-1;border-radius:4px;
+/* ============ sections ============ */
+section{padding:clamp(76px,10vw,140px) 0}
+.rule{border:none;border-top:1px solid var(--line)}
+
+/* ============ hero ============ */
+.hero{padding:clamp(84px,12vw,170px) 0 clamp(64px,8vw,120px)}
+.hero .display{font-size:clamp(46px,7.6vw,100px);max-width:11.5em}
+.hero .display .accent{position:relative;white-space:nowrap}
+.hero .display .accent::after{
+  content:'';position:absolute;left:1%;right:1%;bottom:.08em;height:.1em;z-index:-1;border-radius:4px;
   background:linear-gradient(90deg,var(--mint),var(--lavender),var(--blush),var(--butter));
-  opacity:.55;
+  opacity:.6;
 }
-.hero .lede{margin-top:32px}
-.hero-cta{display:flex;gap:16px;margin-top:44px;flex-wrap:wrap}
-.hero-meta{
-  display:flex;gap:clamp(28px,5vw,72px);margin-top:clamp(64px,8vw,110px);
-  padding-top:36px;border-top:1px solid var(--line);flex-wrap:wrap;
+.hero-cta{display:flex;gap:14px;margin-top:clamp(34px,4vw,48px);flex-wrap:wrap}
+.stats{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(24px,4vw,56px);
+  margin-top:clamp(56px,8vw,110px);padding-top:clamp(30px,4vw,44px);border-top:1px solid var(--line);
 }
-.hero-meta div{min-width:150px}
-.hero-meta b{font-family:var(--serif);font-weight:400;font-size:30px;display:block;letter-spacing:-.01em}
-.hero-meta span{font-size:13px;color:var(--muted);letter-spacing:.04em}
+.stats b{
+  font-weight:100;font-size:clamp(34px,4vw,54px);display:block;letter-spacing:-.02em;line-height:1.1;
+}
+.stats span{font-size:11.5px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);display:block;margin-top:10px}
 
-/* ---------- builder (signature) ---------- */
-.builder{background:var(--surface);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
-.steps{display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;margin-top:64px}
-.step{background:var(--surface);padding:34px 28px 38px;position:relative;transition:background .25s ease}
-.step:hover{background:var(--bg)}
+/* ============ statement band (deck-style) ============ */
+.statement{background:var(--surface);border-top:1px solid var(--line);border-bottom:1px solid var(--line);text-align:center}
+.statement .display{margin:0 auto;max-width:16em;font-size:clamp(30px,4.2vw,52px)}
+.statement .lede{margin-left:auto;margin-right:auto;text-align:center}
+
+/* ============ builder ============ */
+.steps{margin-top:clamp(44px,6vw,72px);counter-reset:step;border-top:1px solid var(--line)}
+.step{
+  display:grid;grid-template-columns:88px 300px 1fr;gap:clamp(18px,3vw,36px);align-items:baseline;
+  padding:clamp(26px,3.4vw,38px) 4px;border-bottom:1px solid var(--line);
+  transition:background .2s;
+}
+.step:hover{background:var(--surface)}
 .step .num{
-  width:34px;height:34px;border-radius:50%;
-  display:flex;align-items:center;justify-content:center;
-  font-size:13px;font-weight:600;margin-bottom:20px;color:var(--ink);
+  font-weight:100;font-size:clamp(30px,3.4vw,44px);letter-spacing:-.02em;color:var(--ink);
+  display:flex;align-items:baseline;gap:12px;line-height:1;
 }
-.step h3{font-size:19px;margin-bottom:10px;font-weight:500}
-.step p{font-size:14px;color:var(--muted);line-height:1.6}
-.step::after{
-  content:'';position:absolute;top:0;left:0;right:0;height:3px;opacity:0;transition:opacity .25s;
-}
-.step:nth-child(1) .num{background:var(--mint)} .step:nth-child(1)::after{background:var(--mint)}
-.step:nth-child(2) .num{background:var(--butter)} .step:nth-child(2)::after{background:var(--butter)}
-.step:nth-child(3) .num{background:var(--lavender)} .step:nth-child(3)::after{background:var(--lavender)}
-.step:nth-child(4) .num{background:var(--blush)} .step:nth-child(4)::after{background:var(--blush)}
-.step:nth-child(5) .num{background:var(--sage)} .step:nth-child(5)::after{background:var(--sage)}
-.step:hover::after{opacity:1}
+.step .num i{width:9px;height:9px;border-radius:50%;flex:none;transform:translateY(-2px)}
+.step h3{font-size:clamp(18px,1.8vw,21px);font-weight:500;letter-spacing:-.01em}
+.step p{font-size:15px;color:var(--muted);max-width:44em}
 .equation{
-  margin-top:44px;text-align:center;font-family:var(--serif);
-  font-size:clamp(19px,2.4vw,26px);color:var(--muted);font-weight:300;
+  margin-top:clamp(36px,5vw,54px);text-align:center;
+  font-weight:200;font-size:clamp(17px,2.3vw,26px);color:var(--muted);letter-spacing:-.01em;
 }
 .equation b{color:var(--ink);font-weight:400}
-.equation .plus{margin:0 .5em;color:var(--faint)}
+.equation .plus{margin:0 .45em;color:var(--faint);font-weight:100}
 
-/* ---------- cards (locations / services) ---------- */
-.grid{display:grid;gap:22px;margin-top:64px}
-.grid.loc{grid-template-columns:repeat(3,1fr)}
-.grid.svc{grid-template-columns:repeat(4,1fr)}
-.card{
-  background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);
-  padding:32px 28px;position:relative;overflow:hidden;
+/* ============ section tint bands (subtle separation) ============ */
+.band{border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.band.tint-lavender{background:#F8F7FB}
+.band.tint-peach{background:#FDF8F4}
+.band.tint-mint{background:#F5F9F8}
+
+/* ============ carousel ============ */
+.car-head{display:flex;align-items:flex-end;justify-content:space-between;gap:24px}
+.car-arrows{display:flex;gap:10px;flex:none}
+.arrow{
+  width:46px;height:46px;border-radius:50%;cursor:pointer;
+  background:var(--surface);border:1px solid var(--line);color:var(--ink);
+  display:flex;align-items:center;justify-content:center;font-size:17px;
+  transition:transform .2s ease,box-shadow .2s ease,opacity .2s;
+}
+.arrow:hover{transform:translateY(-1px);box-shadow:0 8px 20px rgba(31,30,34,.08)}
+.arrow:disabled{opacity:.3;cursor:default;transform:none;box-shadow:none}
+.carousel{
+  display:flex;gap:18px;margin-top:clamp(40px,5vw,60px);
+  overflow-x:auto;scroll-snap-type:x mandatory;
+  padding:6px clamp(20px,5vw,64px) 26px;
+  margin-left:calc(-1 * clamp(20px,5vw,64px));
+  margin-right:calc(-1 * clamp(20px,5vw,64px));
+  scrollbar-width:none;-webkit-overflow-scrolling:touch;
+}
+.carousel::-webkit-scrollbar{display:none}
+.carousel > *{scroll-snap-align:start;flex:none}
+
+/* ============ locations ============ */
+.loc{
+  width:min(320px,78vw);
+  background:var(--surface);border:1px solid var(--line);border-radius:20px;
+  padding:clamp(26px,3vw,32px) clamp(22px,2.6vw,28px);
   transition:transform .25s ease,box-shadow .25s ease;
 }
-.card:hover{transform:translateY(-4px);box-shadow:0 18px 44px rgba(31,30,34,.07)}
-.card .chip{
-  display:inline-block;font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;
-  padding:5px 12px;border-radius:100px;margin-bottom:22px;color:var(--ink);
+.loc:hover{transform:translateY(-4px);box-shadow:0 18px 44px rgba(31,30,34,.07)}
+.loc .tag{
+  display:inline-flex;align-items:center;gap:8px;
+  font-size:10.5px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);
+  margin-bottom:18px;
 }
-.card h3{font-size:21px;font-weight:500;margin-bottom:8px}
-.card p{font-size:14.5px;color:var(--muted)}
-.note{font-size:13px;color:var(--faint);margin-top:26px;font-style:italic}
+.loc .tag i{width:8px;height:8px;border-radius:50%}
+.loc h3{font-size:20px;font-weight:400;letter-spacing:-.01em;margin-bottom:8px}
+.loc p{font-size:14.5px;color:var(--muted)}
+.note{font-size:13px;color:var(--faint);margin-top:8px}
 
-/* service tiles */
-.svc .card{padding:28px 24px}
-.svc .card h3{font-size:17.5px}
-.svc .card .mark{width:10px;height:10px;border-radius:50%;margin-bottom:20px}
+/* ============ services (carousel cards) ============ */
+.svc{
+  width:min(270px,72vw);
+  background:var(--surface);border:1px solid var(--line);border-radius:20px;
+  padding:26px 24px;
+  transition:transform .25s ease,box-shadow .25s ease;
+}
+.svc:hover{transform:translateY(-4px);box-shadow:0 18px 44px rgba(31,30,34,.07)}
+.svc i{width:9px;height:9px;border-radius:50%;display:block;margin-bottom:18px}
+.svc h3{font-size:18px;font-weight:400;letter-spacing:-.01em;margin-bottom:6px}
+.svc span{font-size:13px;color:var(--faint);font-weight:300}
 
-/* ---------- management ---------- */
-.mgmt{background:var(--surface);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
-.roles{margin-top:56px;border-top:1px solid var(--line)}
+/* ============ management (carousel cards) ============ */
 .role{
-  display:grid;grid-template-columns:64px 260px 1fr;gap:28px;align-items:baseline;
-  padding:32px 8px;border-bottom:1px solid var(--line);transition:background .2s;
+  width:min(320px,78vw);
+  background:var(--surface);border:1px solid var(--line);border-radius:20px;
+  padding:clamp(26px,3vw,32px) clamp(22px,2.6vw,28px);
+  display:flex;flex-direction:column;
+  transition:transform .25s ease,box-shadow .25s ease;
 }
-.role:hover{background:var(--bg)}
-.role .idx{font-family:var(--serif);font-size:15px;color:var(--faint)}
-.role h3{font-size:21px;font-weight:500;display:flex;align-items:center;gap:12px}
-.role h3 i{width:8px;height:8px;border-radius:50%;flex:none}
-.role p{font-size:15px;color:var(--muted);max-width:46em}
+.role:hover{transform:translateY(-4px);box-shadow:0 18px 44px rgba(31,30,34,.07)}
+.role .idx{font-weight:100;font-size:34px;color:var(--faint);letter-spacing:-.01em;line-height:1;margin-bottom:22px}
+.role h3{font-size:20px;font-weight:400;letter-spacing:-.01em;display:flex;align-items:center;gap:11px;margin-bottom:10px}
+.role h3 i{width:9px;height:9px;border-radius:50%;flex:none}
+.role p{font-size:14.5px;color:var(--muted)}
 
-/* ---------- brands teaser + page ---------- */
-.brand-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:26px;margin-top:64px}
+/* ============ brands ============ */
+.brand-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;margin-top:clamp(44px,6vw,72px)}
 .brand-card{
-  background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);
-  padding:44px 40px;display:flex;flex-direction:column;min-height:320px;
-  transition:transform .25s ease,box-shadow .25s ease;position:relative;overflow:hidden;
+  background:var(--surface);border:1px solid var(--line);border-radius:22px;
+  padding:clamp(30px,4vw,44px) clamp(26px,3.4vw,40px);
+  display:flex;flex-direction:column;min-height:300px;position:relative;overflow:hidden;
+  transition:transform .25s ease,box-shadow .25s ease;
 }
 .brand-card:hover{transform:translateY(-4px);box-shadow:0 20px 50px rgba(31,30,34,.08)}
 .brand-card::before{content:'';position:absolute;top:0;left:0;right:0;height:4px}
@@ -190,46 +236,44 @@ h2{font-size:clamp(34px,4.4vw,54px);line-height:1.12;max-width:15em}
 .brand-card.c2::before{background:var(--blush)}
 .brand-card.c3::before{background:var(--butter)}
 .status{
-  align-self:flex-start;font-size:11px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;
-  padding:6px 14px;border-radius:100px;margin-bottom:28px;
+  align-self:flex-start;font-size:10.5px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;
+  padding:7px 15px;border-radius:100px;margin-bottom:26px;
 }
 .status.live{background:var(--sage);color:var(--ink)}
 .status.soon{background:var(--bg);border:1px solid var(--line);color:var(--muted)}
-.brand-card h3{font-family:var(--serif);font-size:32px;font-weight:400;margin-bottom:6px}
-.brand-card .vertical{font-size:12.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);font-weight:600;margin-bottom:20px}
+.brand-card h3{font-weight:200;font-size:clamp(28px,3vw,36px);letter-spacing:-.02em;margin-bottom:4px}
+.brand-card .vertical{font-size:11.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);font-weight:600;margin-bottom:18px}
 .brand-card p{font-size:15px;color:var(--muted);flex:1}
-.brand-card .tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:26px}
-.brand-card .tags span{font-size:12.5px;color:var(--muted);border:1px solid var(--line);border-radius:100px;padding:5px 13px;background:var(--bg)}
-.brand-card .visit{margin-top:28px;font-size:14.5px;font-weight:600;display:inline-flex;align-items:center;gap:8px}
-.brand-card .visit:hover{gap:12px}
-.brand-card .visit{transition:gap .2s}
+.brand-card .tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:24px}
+.brand-card .tags span{font-size:12.5px;font-weight:400;color:var(--muted);border:1px solid var(--line);border-radius:100px;padding:6px 14px;background:var(--bg)}
+.brand-card .visit{margin-top:26px;font-size:14.5px;font-weight:500;display:inline-flex;align-items:center;gap:8px;transition:gap .2s}
+.brand-card .visit:hover{gap:13px}
 
-/* ---------- investor strip ---------- */
+/* ============ investor strip ============ */
 .strip{
-  background:var(--ink);color:#FAFAF8;border-radius:calc(var(--radius) + 6px);
-  padding:clamp(48px,6vw,80px);display:flex;justify-content:space-between;align-items:center;gap:40px;flex-wrap:wrap;
+  background:var(--ink);color:#FAFAF8;border-radius:26px;
+  padding:clamp(40px,6vw,80px) clamp(28px,5vw,80px);
+  display:flex;justify-content:space-between;align-items:center;gap:36px;flex-wrap:wrap;
 }
-.strip h2{color:#fff;font-weight:300;font-size:clamp(28px,3.4vw,42px)}
-.strip p{color:rgba(250,250,248,.62);margin-top:14px;max-width:34em;font-size:15.5px}
+.strip h2{font-weight:200;font-size:clamp(27px,3.4vw,44px);letter-spacing:-.02em;line-height:1.12;max-width:14em}
+.strip p{color:rgba(250,250,248,.6);margin-top:14px;max-width:32em;font-size:15px;font-weight:300}
 .strip .btn{background:#FAFAF8;color:var(--ink)}
 .strip .btn .dot{background:var(--peach)}
 
-/* ---------- footer ---------- */
-footer{border-top:1px solid var(--line);padding:64px 0 48px;margin-top:clamp(80px,10vw,140px)}
-.foot{display:flex;justify-content:space-between;gap:40px;flex-wrap:wrap}
-.foot small{color:var(--faint);font-size:13px}
-.foot .cols{display:flex;gap:clamp(40px,6vw,90px);flex-wrap:wrap}
-.foot h4{font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--faint);margin-bottom:16px;font-weight:600}
-.foot a{display:block;font-size:14.5px;color:var(--muted);margin-bottom:10px;transition:color .2s}
+/* ============ footer ============ */
+footer{border-top:1px solid var(--line);padding:clamp(48px,6vw,70px) 0 44px;margin-top:clamp(64px,9vw,130px)}
+.foot{display:flex;justify-content:space-between;gap:44px;flex-wrap:wrap}
+.foot small{color:var(--faint);font-size:13px;font-weight:300;line-height:1.7}
+.foot .cols{display:flex;gap:clamp(36px,6vw,90px);flex-wrap:wrap}
+.foot h4{font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--faint);margin-bottom:16px;font-weight:600}
+.foot a{display:block;font-size:14.5px;font-weight:300;color:var(--muted);margin-bottom:12px;transition:color .2s;padding:2px 0}
 .foot a:hover{color:var(--ink)}
 
-/* ---------- page routing ---------- */
+/* ============ routing / reveal ============ */
 .page{display:none}
 .page.active{display:block}
-.page-head{padding:clamp(90px,11vw,150px) 0 0}
-
-/* ---------- reveal ---------- */
-.reveal{opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .7s ease}
+.page-head{padding:clamp(76px,11vw,150px) 0 0}
+.reveal{opacity:0;transform:translateY(20px);transition:opacity .7s ease,transform .7s ease}
 .reveal.in{opacity:1;transform:none}
 @media (prefers-reduced-motion:reduce){
   *{animation:none!important;transition:none!important}
@@ -237,24 +281,45 @@ footer{border-top:1px solid var(--line);padding:64px 0 48px;margin-top:clamp(80p
   html{scroll-behavior:auto}
 }
 
-/* ---------- responsive ---------- */
-@media (max-width:1020px){
-  .steps{grid-template-columns:repeat(2,1fr)}
-  .step:last-child{grid-column:1/-1}
-  .grid.svc{grid-template-columns:repeat(2,1fr)}
-  .role{grid-template-columns:44px 1fr;grid-template-rows:auto auto}
-  .role p{grid-column:2}
+/* ============ mobile ============ */
+@media (max-width:1000px){
+  .step{grid-template-columns:64px 1fr}
+  .step p{grid-column:2}
 }
-@media (max-width:760px){
-  .nav-links{display:none;position:absolute;top:76px;left:0;right:0;background:var(--bg);
-    border-bottom:1px solid var(--line);flex-direction:column;padding:24px;gap:20px;align-items:flex-start}
-  .nav-links.open{display:flex}
-  .menu-toggle{display:block}
-  .grid.loc{grid-template-columns:1fr}
-  .grid.svc{grid-template-columns:1fr}
-  .brand-grid{grid-template-columns:1fr}
-  .steps{grid-template-columns:1fr}
+@media (max-width:720px){
+  body{font-size:15.5px}
+  section{padding:64px 0}
+  .nav{height:64px}
   .nav .btn{display:none}
+  .menu-toggle{display:flex}
+  .nav-links{
+    display:flex;position:fixed;inset:0;background:var(--bg);
+    flex-direction:column;justify-content:center;align-items:flex-start;
+    padding:0 32px;gap:8px;z-index:60;
+    opacity:0;pointer-events:none;transition:opacity .25s ease;
+  }
+  .nav-links.open{opacity:1;pointer-events:auto}
+  .nav-links a{
+    font-size:32px;font-weight:200;letter-spacing:-.02em;color:var(--ink);
+    padding:10px 0;width:100%;
+  }
+  .nav-links a::after{display:none}
+  .nav-links .menu-cta{margin-top:22px;font-size:15px;font-weight:500;
+    background:var(--ink);color:#fff;border-radius:100px;padding:16px 30px;width:auto}
+  .hero{padding-top:64px}
+  .hero-cta .btn{width:100%}
+  .stats{grid-template-columns:1fr 1fr;gap:28px 20px}
+  .car-arrows{display:none}
+  .carousel{gap:14px;padding-bottom:18px}
+  .brand-grid{grid-template-columns:1fr;gap:16px}
+  .brand-card{min-height:0}
+  .step{grid-template-columns:48px 1fr;padding:22px 2px}
+  .step .num{font-size:24px}
+  .step .num i{width:8px;height:8px}
+  .strip{flex-direction:column;align-items:flex-start}
+  .strip .btn{width:100%}
+  .equation{font-size:15px}
+  .equation .plus{margin:0 .3em}
 }
 </style>
 </head>
@@ -274,9 +339,12 @@ footer{border-top:1px solid var(--line);padding:64px 0 48px;margin-top:clamp(80p
       <a href="#/" data-route="home" data-target="#services">Services</a>
       <a href="#/" data-route="home" data-target="#management">Management</a>
       <a href="#/brands" data-route="brands">Brands</a>
+      <a class="menu-cta" href="mailto:hello@happenings.com">Contact us</a>
     </nav>
     <a class="btn" href="#/" data-route="home" data-target="#platform"><span class="dot"></span>Start planning</a>
-    <button class="menu-toggle" id="menuToggle" aria-label="Open menu">☰</button>
+    <button class="menu-toggle" id="menuToggle" aria-label="Open menu" aria-expanded="false">
+      <span></span><span></span>
+    </button>
   </div>
 </header>
 
@@ -285,108 +353,135 @@ footer{border-top:1px solid var(--line);padding:64px 0 48px;margin-top:clamp(80p
 
   <section class="hero wrap">
     <div class="reveal">
-      <div class="eyebrow"><i style="background:var(--mint)"></i>The operating system for events</div>
-      <h1>Any gathering, <em>beautifully produced</em>. One platform.</h1>
+      <div class="kicker"><i style="background:var(--mint)"></i>The Operating System for Events</div>
+      <h1 class="display">Any gathering.<br>One platform.<br><span class="accent">Beautifully produced.</span></h1>
       <p class="lede">Happenings unifies locations, services, and dedicated management into a single, seamless production pipeline — for weddings, corporate gatherings, celebrations, and everything in between.</p>
       <div class="hero-cta">
         <a class="btn" href="#platform"><span class="dot"></span>Build your event</a>
         <a class="btn ghost" href="#/brands" data-route="brands">Explore our brands</a>
       </div>
     </div>
-    <div class="hero-meta reveal">
+    <div class="stats reveal">
       <div><b>$1.46T</b><span>Legacy event market</span></div>
-      <div><b>98%</b><span>Reduction in planning hours</span></div>
-      <div><b>2×</b><span>Vendor redundancy, every event</span></div>
-      <div><b>1</b><span>Point of contact, start to finish</span></div>
+      <div><b>98%</b><span>Fewer planning hours</span></div>
+      <div><b>2×</b><span>Vendor redundancy</span></div>
+      <div><b>1</b><span>Point of contact</span></div>
+    </div>
+  </section>
+
+  <!-- STATEMENT -->
+  <section class="statement">
+    <div class="wrap reveal">
+      <h2 class="display">Events are broken. We rebuilt the way they're made.</h2>
+      <p class="lede">No more dozens of vendor relationships, spreadsheets, and sleepless coordination. One system carries the whole event — with a backup behind every moving piece.</p>
     </div>
   </section>
 
   <!-- BUILDER -->
-  <section class="builder" id="platform">
-    <div class="wrap">
-      <div class="reveal">
-        <div class="eyebrow"><i style="background:var(--butter)"></i>How it works</div>
-        <h2>Compose your event, step by step.</h2>
-        <p class="lede">Every Happening is built the same simple way. Choose the pieces — we orchestrate the whole.</p>
-      </div>
-      <div class="steps reveal">
-        <div class="step">
-          <div class="num">1</div>
-          <h3>Choose your location</h3>
-          <p>Browse curated venues — gardens, rooftops, ranches, galleries — each pre-vetted and production-ready.</p>
-        </div>
-        <div class="step">
-          <div class="num">2</div>
-          <h3>Add your services</h3>
-          <p>Layer in catering, floral, photography, music, and more. Every service integrates automatically.</p>
-        </div>
-        <div class="step">
-          <div class="num">3</div>
-          <h3>Meet your management</h3>
-          <p>A dedicated team — planner through on-site staff — is assigned to your event from day one.</p>
-        </div>
-        <div class="step">
-          <div class="num">4</div>
-          <h3>Share &amp; confirm</h3>
-          <p>Send your Share link. Production activates the moment guest commitments are validated.</p>
-        </div>
-        <div class="step">
-          <div class="num">5</div>
-          <h3>We produce it</h3>
-          <p>Vendors dispatch, timelines sync, backups stand by. You show up. Everything else converges.</p>
-        </div>
-      </div>
-      <p class="equation reveal"><b>Location</b><span class="plus">+</span><b>Services</b><span class="plus">+</span><b>Management</b><span class="plus">=</span><em>Your Happening</em></p>
+  <section class="wrap" id="platform">
+    <div class="reveal">
+      <div class="kicker"><i style="background:var(--butter)"></i>How It Works</div>
+      <h2 class="display">Compose your event, step by step.</h2>
     </div>
+    <div class="steps reveal">
+      <div class="step">
+        <div class="num"><i style="background:var(--mint)"></i>1</div>
+        <h3>Choose your location</h3>
+        <p>Browse curated venues — gardens, rooftops, ranches, galleries — each pre-vetted and production-ready.</p>
+      </div>
+      <div class="step">
+        <div class="num"><i style="background:var(--butter)"></i>2</div>
+        <h3>Add your services</h3>
+        <p>Layer in catering, floral, photography, music, and more. Every service integrates automatically.</p>
+      </div>
+      <div class="step">
+        <div class="num"><i style="background:var(--lavender)"></i>3</div>
+        <h3>Meet your management</h3>
+        <p>A dedicated team — planner through on-site staff — is assigned to your event from day one.</p>
+      </div>
+      <div class="step">
+        <div class="num"><i style="background:var(--blush)"></i>4</div>
+        <h3>Share &amp; confirm</h3>
+        <p>Send your Share link. Production activates the moment guest commitments are validated.</p>
+      </div>
+      <div class="step">
+        <div class="num"><i style="background:var(--sage)"></i>5</div>
+        <h3>We produce it</h3>
+        <p>Vendors dispatch, timelines sync, backups stand by. You show up. Everything else converges.</p>
+      </div>
+    </div>
+    <p class="equation reveal"><b>Location</b><span class="plus">+</span><b>Services</b><span class="plus">+</span><b>Management</b><span class="plus">=</span><b>Your Happening</b></p>
   </section>
 
   <!-- LOCATIONS -->
-  <section class="wrap" id="locations">
-    <div class="reveal">
-      <div class="eyebrow"><i style="background:var(--lavender)"></i>Locations</div>
-      <h2>Spaces for every kind of occasion.</h2>
-      <p class="lede">From open-air ceremonies to executive summits — every venue on the platform is inspected, permitted, and paired with a standby alternative.</p>
+  <section class="band tint-lavender" id="locations">
+    <div class="wrap">
+      <div class="car-head reveal">
+        <div>
+          <div class="kicker"><i style="background:var(--lavender)"></i>Locations</div>
+          <h2 class="display">Spaces for every occasion.</h2>
+          <p class="lede">Every venue on the platform is inspected, permitted, and paired with a standby alternative.</p>
+        </div>
+        <div class="car-arrows">
+          <button class="arrow" data-car="locCar" data-dir="-1" aria-label="Scroll locations left">←</button>
+          <button class="arrow" data-car="locCar" data-dir="1" aria-label="Scroll locations right">→</button>
+        </div>
+      </div>
+      <div class="carousel reveal" id="locCar">
+        <div class="loc"><div class="tag"><i style="background:var(--mint)"></i>Outdoor</div><h3>Botanical Gardens</h3><p>Manicured grounds and natural backdrops for ceremonies and golden-hour celebrations.</p></div>
+        <div class="loc"><div class="tag"><i style="background:var(--butter)"></i>Urban</div><h3>Rooftop Terraces</h3><p>Skyline settings for launches, cocktail evenings, and after-hours gatherings.</p></div>
+        <div class="loc"><div class="tag"><i style="background:var(--blush)"></i>Destination</div><h3>Private Ranches</h3><p>Full-property weekends — retreats, reunions, and multi-day celebrations.</p></div>
+        <div class="loc"><div class="tag"><i style="background:var(--lavender)"></i>Cultural</div><h3>Gallery Lofts</h3><p>Minimal, light-filled interiors for dinners, showcases, and brand moments.</p></div>
+        <div class="loc"><div class="tag"><i style="background:var(--peach)"></i>Waterfront</div><h3>Beachfront Venues</h3><p>Coastal settings with power, permits, tenting, and tide-aware timelines handled.</p></div>
+        <div class="loc"><div class="tag"><i style="background:var(--sage)"></i>Classic</div><h3>Historic Ballrooms</h3><p>Grand rooms for galas, anniversaries, and formal corporate evenings.</p></div>
+      </div>
+      <p class="note">Example venue categories. The platform curates locations per market and per brand.</p>
     </div>
-    <div class="grid loc reveal">
-      <div class="card"><span class="chip" style="background:var(--mint)">Outdoor</span><h3>Botanical Gardens</h3><p>Manicured grounds and natural backdrops for ceremonies, receptions, and golden-hour celebrations.</p></div>
-      <div class="card"><span class="chip" style="background:var(--butter)">Urban</span><h3>Rooftop Terraces</h3><p>Skyline settings for launches, cocktail evenings, and after-hours gatherings.</p></div>
-      <div class="card"><span class="chip" style="background:var(--blush)">Destination</span><h3>Private Ranches</h3><p>Full-property weekends — retreats, reunions, and multi-day celebrations, produced end to end.</p></div>
-      <div class="card"><span class="chip" style="background:var(--lavender)">Cultural</span><h3>Gallery Lofts</h3><p>Minimal, light-filled interiors for dinners, showcases, and brand moments.</p></div>
-      <div class="card"><span class="chip" style="background:var(--peach)">Waterfront</span><h3>Beachfront Venues</h3><p>Coastal settings with full logistics — power, permits, tenting, and tide-aware timelines.</p></div>
-      <div class="card"><span class="chip" style="background:var(--sage)">Classic</span><h3>Historic Ballrooms</h3><p>Grand rooms for galas, anniversaries, and formal corporate evenings.</p></div>
-    </div>
-    <p class="note">Example venue categories. The Happenings platform curates locations per market and per brand.</p>
   </section>
 
   <!-- SERVICES -->
-  <section class="wrap" id="services" style="padding-top:0">
-    <div class="reveal">
-      <div class="eyebrow"><i style="background:var(--peach)"></i>Services</div>
-      <h2>Every service. One integration.</h2>
-      <p class="lede">Each service is an additive unit — select what you need, and it slots into a single synchronized production timeline with a backup provider mirrored behind it.</p>
+  <section class="band tint-peach" id="services" style="border-top:none">
+    <div class="wrap">
+      <div class="car-head reveal">
+        <div>
+          <div class="kicker"><i style="background:var(--peach)"></i>Services</div>
+          <h2 class="display">Every service. One integration.</h2>
+          <p class="lede">Select what you need — each service slots into a single synchronized timeline, with a backup provider mirrored behind it.</p>
+        </div>
+        <div class="car-arrows">
+          <button class="arrow" data-car="svcCar" data-dir="-1" aria-label="Scroll services left">←</button>
+          <button class="arrow" data-car="svcCar" data-dir="1" aria-label="Scroll services right">→</button>
+        </div>
+      </div>
+      <div class="carousel reveal" id="svcCar">
+        <div class="svc"><i style="background:var(--mint)"></i><h3>Catering &amp; Cuisine</h3><span>Plated · Stations · Family-style</span></div>
+        <div class="svc"><i style="background:var(--blush)"></i><h3>Floral &amp; Design</h3><span>Installations · Tablescapes</span></div>
+        <div class="svc"><i style="background:var(--lavender)"></i><h3>Photography &amp; Film</h3><span>Coverage · Highlight films</span></div>
+        <div class="svc"><i style="background:var(--butter)"></i><h3>Music &amp; Entertainment</h3><span>DJs · Live acts · Performers</span></div>
+        <div class="svc"><i style="background:var(--sage)"></i><h3>Rentals &amp; Décor</h3><span>Seating · Tenting · Lighting</span></div>
+        <div class="svc"><i style="background:var(--peach)"></i><h3>Bar Service</h3><span>Licensed · Insured programs</span></div>
+        <div class="svc"><i style="background:var(--mint)"></i><h3>Guest Transportation</h3><span>Shuttles · Valet · Arrivals</span></div>
+        <div class="svc"><i style="background:var(--lavender)"></i><h3>AV &amp; Production</h3><span>Sound · Screens · Staging</span></div>
+      </div>
+      <p class="note">Example service categories. Offerings are tailored per event vertical and brand.</p>
     </div>
-    <div class="grid svc reveal">
-      <div class="card"><div class="mark" style="background:var(--mint)"></div><h3>Catering &amp; Cuisine</h3><p>Plated, stations, or family-style — matched to venue and headcount.</p></div>
-      <div class="card"><div class="mark" style="background:var(--blush)"></div><h3>Floral &amp; Design</h3><p>Installations, tablescapes, and styling aligned to your palette.</p></div>
-      <div class="card"><div class="mark" style="background:var(--lavender)"></div><h3>Photography &amp; Film</h3><p>Coverage teams scheduled around your event's key moments.</p></div>
-      <div class="card"><div class="mark" style="background:var(--butter)"></div><h3>Music &amp; Entertainment</h3><p>DJs, live acts, and performers with full technical riders handled.</p></div>
-      <div class="card"><div class="mark" style="background:var(--sage)"></div><h3>Rentals &amp; Décor</h3><p>Seating, tenting, lighting, and staging — delivered and struck on time.</p></div>
-      <div class="card"><div class="mark" style="background:var(--peach)"></div><h3>Bar Service</h3><p>Licensed, insured beverage programs from toast to last call.</p></div>
-      <div class="card"><div class="mark" style="background:var(--mint)"></div><h3>Guest Transportation</h3><p>Shuttles, valet, and arrival logistics timed to the minute.</p></div>
-      <div class="card"><div class="mark" style="background:var(--lavender)"></div><h3>AV &amp; Production</h3><p>Sound, screens, and staging for keynotes, toasts, and showcases.</p></div>
-    </div>
-    <p class="note">Example service categories. Offerings are tailored per event vertical and brand.</p>
   </section>
 
   <!-- MANAGEMENT -->
-  <section class="mgmt" id="management">
+  <section class="band tint-mint" id="management" style="border-top:none">
     <div class="wrap">
-      <div class="reveal">
-        <div class="eyebrow"><i style="background:var(--blush)"></i>Management</div>
-        <h2>A dedicated team on every event.</h2>
-        <p class="lede">Five roles. One accountable chain. From the first conversation to the final send-off, your team is the unified safety net legacy planning never had.</p>
+      <div class="car-head reveal">
+        <div>
+          <div class="kicker"><i style="background:var(--blush)"></i>Management</div>
+          <h2 class="display">A dedicated team on every event.</h2>
+          <p class="lede">Five roles. One accountable chain — the unified safety net legacy planning never had.</p>
+        </div>
+        <div class="car-arrows">
+          <button class="arrow" data-car="mgmtCar" data-dir="-1" aria-label="Scroll team left">←</button>
+          <button class="arrow" data-car="mgmtCar" data-dir="1" aria-label="Scroll team right">→</button>
+        </div>
       </div>
-      <div class="roles reveal">
+      <div class="carousel reveal" id="mgmtCar">
         <div class="role"><span class="idx">01</span><h3><i style="background:var(--mint)"></i>Planner</h3><p>Designs the full event architecture — vision, budget, vendors, and timeline — and remains your strategic lead throughout.</p></div>
         <div class="role"><span class="idx">02</span><h3><i style="background:var(--butter)"></i>Coordinator</h3><p>Manages every vendor relationship and confirmation cycle, keeping all moving pieces aligned to a single schedule.</p></div>
         <div class="role"><span class="idx">03</span><h3><i style="background:var(--lavender)"></i>Production Manager</h3><p>Owns logistics, load-in, and technical execution — power, staging, permits, and contingency activation.</p></div>
@@ -399,10 +494,10 @@ footer{border-top:1px solid var(--line);padding:64px 0 48px;margin-top:clamp(80p
   <!-- BRANDS TEASER -->
   <section class="wrap">
     <div class="reveal">
-      <div class="eyebrow"><i style="background:var(--sage)"></i>Our brands</div>
-      <h2>One engine. A family of brands.</h2>
+      <div class="kicker"><i style="background:var(--sage)"></i>Our Brands</div>
+      <h2 class="display">One engine. A family of brands.</h2>
       <p class="lede">Happenings powers purpose-built brands for each event vertical — beginning with ParkWed, our live proof-point for outdoor weddings.</p>
-      <div class="hero-cta" style="margin-top:36px">
+      <div class="hero-cta">
         <a class="btn" href="#/brands" data-route="brands"><span class="dot"></span>Explore the brands</a>
       </div>
     </div>
@@ -425,8 +520,8 @@ footer{border-top:1px solid var(--line);padding:64px 0 48px;margin-top:clamp(80p
 <main class="page" id="page-brands">
   <section class="page-head wrap">
     <div class="reveal in">
-      <div class="eyebrow"><i style="background:var(--lavender)"></i>The Happenings family</div>
-      <h2>One platform. Every occasion.</h2>
+      <div class="kicker"><i style="background:var(--lavender)"></i>The Happenings Family</div>
+      <h2 class="display">One platform. Every occasion.</h2>
       <p class="lede">Each brand is a purpose-built storefront on the same production engine — same locations logic, same services integration, same five-role management team. New verticals launch in weeks, not years.</p>
     </div>
   </section>
@@ -508,7 +603,7 @@ footer{border-top:1px solid var(--line);padding:64px 0 48px;margin-top:clamp(80p
 </footer>
 
 <script>
-// ---- simple hash routing between Home and Brands ----
+// ---- hash routing between Home and Brands ----
 const pages = {home: document.getElementById('page-home'), brands: document.getElementById('page-brands')};
 function switchPage(route){
   Object.values(pages).forEach(p => p.classList.remove('active'));
@@ -533,7 +628,7 @@ document.querySelectorAll('[data-route]').forEach(a => {
     if (a.getAttribute('href')?.startsWith('#')){
       e.preventDefault();
       goTo(a.dataset.route, a.dataset.target);
-      document.getElementById('navLinks').classList.remove('open');
+      closeMenu();
     }
   });
 });
@@ -543,19 +638,52 @@ window.addEventListener('hashchange', () => {
 });
 
 // ---- mobile menu ----
-document.getElementById('menuToggle').addEventListener('click', () => {
-  document.getElementById('navLinks').classList.toggle('open');
+const menuBtn = document.getElementById('menuToggle');
+const navLinks = document.getElementById('navLinks');
+function closeMenu(){
+  navLinks.classList.remove('open');
+  menuBtn.classList.remove('open');
+  menuBtn.setAttribute('aria-expanded','false');
+  document.body.style.overflow = '';
+}
+menuBtn.addEventListener('click', () => {
+  const open = navLinks.classList.toggle('open');
+  menuBtn.classList.toggle('open', open);
+  menuBtn.setAttribute('aria-expanded', String(open));
+  document.body.style.overflow = open ? 'hidden' : '';
 });
+navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMenu));
 
 // ---- scroll reveal ----
 const io = ('IntersectionObserver' in window) ? new IntersectionObserver(entries => {
   entries.forEach(en => { if (en.isIntersecting){ en.target.classList.add('in'); io.unobserve(en.target); } });
-}, {threshold: .12}) : null;
+}, {threshold: .1}) : null;
 function revealScan(){
   document.querySelectorAll('.page.active .reveal:not(.in)').forEach(el => io ? io.observe(el) : el.classList.add('in'));
 }
 revealScan();
 switchPage(location.hash === '#/brands' ? 'brands' : 'home');
+
+// ---- carousels ----
+document.querySelectorAll('.arrow').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const car = document.getElementById(btn.dataset.car);
+    const card = car.querySelector(':scope > *');
+    const step = card ? card.offsetWidth + 18 : 320;
+    car.scrollBy({left: step * Number(btn.dataset.dir), behavior: 'smooth'});
+  });
+});
+function syncArrows(){
+  document.querySelectorAll('.carousel').forEach(car => {
+    const max = car.scrollWidth - car.clientWidth - 2;
+    document.querySelectorAll(`.arrow[data-car="${car.id}"]`).forEach(btn => {
+      btn.disabled = Number(btn.dataset.dir) < 0 ? car.scrollLeft <= 2 : car.scrollLeft >= max;
+    });
+  });
+}
+document.querySelectorAll('.carousel').forEach(car => car.addEventListener('scroll', syncArrows, {passive: true}));
+window.addEventListener('resize', syncArrows);
+syncArrows();
 </script>
 </body>
 </html>
